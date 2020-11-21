@@ -27,7 +27,7 @@ viewRoles = function() {
     });
 };
 
-//department.id should be role.department_id to list the department id
+//employee.manager_id instead of CONCAT
 viewEmployees = function() {
     const sql = `SELECT employee.id,
                     employee.first_name, 
@@ -35,12 +35,13 @@ viewEmployees = function() {
                     role.title, 
                     department.name AS Dept, 
                     role.salary,
-                    employee.manager_id
+                    employee.manager_id AS manager
                 FROM employee
                 JOIN role
                     ON employee.role_id = role.id
                 LEFT JOIN department
                     ON role.department_id = department.id`;
+                    //INNER JOIN employee
                 
     connection.query(sql, function(err, res) {
         if (err) throw err;
