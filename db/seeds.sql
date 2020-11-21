@@ -28,15 +28,15 @@ INSERT INTO employee(first_name, last_name, role_id, manager_id)
         ('Sarah', 'Lourd', 3, 1),
         ('Tom', 'Allen', 3, 1),
         ('Tammer', 'Galal', 4, null),
-        ('Ronald', 'Firbank', 5, 2),
-        ('Virginia', 'Woolf', 5, 2),
-        ('Piers', 'Gaveston', 6, 2),
+        ('Ronald', 'Firbank', 5, 8),
+        ('Virginia', 'Woolf', 5, 8),
+        ('Piers', 'Gaveston', 6, 8),
         ('Charles', 'LeRoi', 7, null),
-        ('Katherine', 'Mansfield', 8, 3),
-        ('Dora', 'Carrington', 8, 3),
+        ('Katherine', 'Mansfield', 8, 12),
+        ('Dora', 'Carrington', 8, 12),
         ('Edward', 'Bellamy', 9, null),
-        ('Montague', 'Summers', 10, 4),
-        ('Octavia', 'Butler', 10, 4),
-        ('Unica', 'Zurn', 10, 4);
+        ('Montague', 'Summers', 10, 15),
+        ('Octavia', 'Butler', 10, 15),
+        ('Unica', 'Zurn', 10, 15);
 
 
