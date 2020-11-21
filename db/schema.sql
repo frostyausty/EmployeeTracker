@@ -20,13 +20,6 @@ CREATE TABLE role(
     PRIMARY KEY(id) 
 );
 
--- CREATE TABLE manager(
---     id INTEGER(1) AUTO_INCREMENT,
---     first_name VARCHAR(30),
---     last_name VARCHAR(30),
---     PRIMARY KEY(id)
--- );
-
 CREATE TABLE employee(
     id INTEGER(4) AUTO_INCREMENT,
     first_name VARCHAR(30),
@@ -35,3 +28,19 @@ CREATE TABLE employee(
     manager_id INTEGER,
     PRIMARY KEY(id)
 );
+
+-- function for manager id
+
+
+
+
+
+
+
+
+-- CREATE TABLE manager(
+--     id INTEGER(1) AUTO_INCREMENT,
+--     first_name VARCHAR(30),
+--     last_name VARCHAR(30),
+--     PRIMARY KEY(id)
+-- );

@@ -1,9 +1,11 @@
+require('dotenv').config()
 const mysql = require('mysql2');
+const cTable = require('console.table');
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
     database: 'employees_db'
 });
 
@@ -11,7 +13,7 @@ viewDepartments = function() {
     const sql = 'SELECT department.name, department.id FROM department';
     connection.query(sql, function(err, res) {
         if (err) throw err;
-        console.log(res);        
+        console.table(res);        
     });
 };
 
@@ -27,11 +29,12 @@ viewRoles = function() {
     });
 };
 
+
+
 //employee.manager_id instead of CONCAT
 viewEmployees = function() {
     const sql = `SELECT employee.id,
-                    employee.first_name, 
-                    employee.last_name, 
+                    CONCAT(employee.first_name,' ', employee.last_name) AS Name, 
                     role.title, 
                     department.name AS Dept, 
                     role.salary,
@@ -42,6 +45,7 @@ viewEmployees = function() {
                 LEFT JOIN department
                     ON role.department_id = department.id`;
                     //INNER JOIN employee
+                    //call manager function AS manager
                 
     connection.query(sql, function(err, res) {
         if (err) throw err;
