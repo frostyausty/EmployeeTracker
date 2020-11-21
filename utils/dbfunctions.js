@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
 });
 
 viewDepartments = function() {
-    const sql = 'SELECT * FROM department';
+    const sql = 'SELECT department.name, department.id FROM department';
     connection.query(sql, function(err, res) {
         if (err) throw err;
         console.log(res);        
@@ -48,10 +48,6 @@ viewEmployees = function() {
         console.log(res);        
     });
 };
-//                 `SELECT * 
-//                 FROM employee
-//                 RIGHT JOIN role
-//                 ON employee.role_id = role.id`
 
 endConnection = function() {
     connection.end();
