@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 
-const { viewDepartments, viewRoles, viewEmployees, endConnection } = require('./utils/dbfunctions');
+const { viewDepartments, viewRoles, viewEmployees, addDepartment, endConnection } = require('./utils/dbfunctions');
 
 const userOptions = () => {
     return inquirer.prompt(
@@ -40,18 +40,71 @@ const userOptions = () => {
                 break;
 
             case 'Add a department':
-                console.log('Add a department');
-                userOptions();
+                inquirer.prompt([{
+                    type: 'input',
+                    name: 'name',
+                    message: 'What is the name of the new department?'
+                    }])
+                    .then(response => {
+                        console.log(response);
+                        //(this works adds an object but not the user answer addDepartment(response);
+                        userOptions();
+                    });
                 break;
 
             case 'Add a role':
-                console.log('Add a role');
-                userOptions();
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'title',
+                        message: 'What is the name of the new role?'
+                    },
+                    {
+                        type: 'input',
+                        name: 'salary',
+                        message: 'Enter a salary for the new role:'
+                    },
+                    {
+                        type: 'input',
+                        name: 'department',
+                        message: 'What department will the new role belong to?'
+                    }])
+                    .then(response => {
+                        console.log(response);
+                        // addRole();
+                        userOptions();
+                    });                
                 break;
 
             case 'Add an employee':
-                console.log('Add an employee');
-                userOptions();
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'first',
+                        message: "What is the employee's first name?"
+                    },
+                    {
+                        type: 'input',
+                        name: 'last',
+                        message: "What is the employee's last name?"
+                    },
+                    {
+                        type: 'list',
+                        name: 'role',
+                        message: "What is the new employee's role?",
+                        choices: ['a', 'b', 'c']
+                    },
+                    {
+                        type: 'list',
+                        name: 'manager',
+                        message: "Who is the new employee's manager?",
+                        choices: ['a', 'b', 'c']
+                    }])
+                    .then(response => {
+                        console.log(response);
+                        // addEmployee();
+                        userOptions();
+                    });                
                 break;
 
             case 'Update an employee role':
