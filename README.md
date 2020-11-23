@@ -9,10 +9,11 @@ I used MYSQL to create a database with an employee, role, and department table a
 
 ## Walkthrough video
 
+https://drive.google.com/file/d/17IlCZqGoe0NMvhAvfw9eKZT5aOvLoc5B/view
 
+## Link to GitHub Repo
 
-## Link to deployed application
-
+https://github.com/frostyausty/EmployeeTracker
 
 ### Collaboration
 
