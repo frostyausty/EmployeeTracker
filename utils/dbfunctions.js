@@ -14,7 +14,7 @@ viewDepartments = function() {
     const sql = 'SELECT department.name, department.id FROM department';
     connection.query(sql, function(err, res) {
         if (err) throw err;
-        console.table(' ', res);        
+        console.table('\n', res);        
     });
 };
 
@@ -26,9 +26,11 @@ viewRoles = function() {
                 ON role.department_id = department.id`;
     connection.query(sql, function(err, res) {
         if (err) throw err;
-        console.table(' ', res);        
+        console.table('\n', res);        
     });
 };
+
+
 
 //employee.manager_id instead of CONCAT
 viewEmployees = function() {
@@ -48,7 +50,7 @@ viewEmployees = function() {
                 
     connection.query(sql, function(err, res) {
         if (err) throw err;
-        console.table(' ', res);        
+        console.table('\n', res);        
     });
 };
 
@@ -57,15 +59,50 @@ addDepartment = function(response) {
         `INSERT INTO department SET ?`,
         {
             //need to take response from inquirer and place as 'name'
-            name: response,
+            name: response['name'],
             id: this.lastID
         }, 
         function(err, res) {
-        if (err) throw err;
-        console.log(res);
+            if (err) throw err;
+            //console.log(res);
         }
     );
-        console.log(query.sql)
+        console.log('\n','Department successfully added','\n')
+};
+
+addRole = function(response) {
+    const query = connection.query(
+        `INSERT INTO role SET ?`,
+        {
+            title: response['title'],
+            salary: response['salary'],
+            department_id: response['department'],
+            id: this.lastID
+        },
+        function(err, res) {
+            if(err) throw err;
+            //console.log(res);
+        }
+    );
+        console.log('\n','Role successfully added','\n');
+};
+
+addEmployee = function(response) {
+    const query = connection.query(
+        `INSERT INTO employee SET ?`,
+        {
+            first_name: response['first'],
+            last_name: response['last'],
+            role_id: response['role'],
+            manager_id: response['manager'],
+            id: this.lastID
+        },
+        function(err, res) {
+            if(err) throw err;
+            //console.log(res);
+        }
+    );
+        console.log('\n','Employee successfully added','\n');
 };
 
 endConnection = function() {
@@ -73,4 +110,4 @@ endConnection = function() {
     console.log('Ended connection');
 };
 
-module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, endConnection };
+module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, endConnection };

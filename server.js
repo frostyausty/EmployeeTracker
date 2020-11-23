@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 
-const { viewDepartments, viewRoles, viewEmployees, addDepartment, endConnection } = require('./utils/dbfunctions');
+const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, endConnection } = require('./utils/dbfunctions');
 
 const userOptions = () => {
     return inquirer.prompt(
@@ -46,8 +46,7 @@ const userOptions = () => {
                     message: 'What is the name of the new department?'
                     }])
                     .then(response => {
-                        console.log(response);
-                        //(this works adds an object but not the user answer addDepartment(response);
+                        addDepartment(response);
                         userOptions();
                     });
                 break;
@@ -65,13 +64,14 @@ const userOptions = () => {
                         message: 'Enter a salary for the new role:'
                     },
                     {
-                        type: 'input',
+                        type: 'list',
                         name: 'department',
-                        message: 'What department will the new role belong to?'
+                        message: 'What department will the new role belong to? Sales(1) Engineering(2) Finance(3) Legal(4)',
+                        choices: ['1', '2', '3', '4']
                     }])
                     .then(response => {
-                        console.log(response);
-                        // addRole();
+                        //console.log(response);
+                        addRole(response);
                         userOptions();
                     });                
                 break;
@@ -91,18 +91,18 @@ const userOptions = () => {
                     {
                         type: 'list',
                         name: 'role',
-                        message: "What is the new employee's role?",
-                        choices: ['a', 'b', 'c']
+                        message: "What is the new employee's role? Salesperson(2), Engineer(5), Associate Engineer(6), Financial Analyst(8), Lawyer(10)",
+                        choices: ['2', '5', '6','8','10']
                     },
                     {
                         type: 'list',
                         name: 'manager',
-                        message: "Who is the new employee's manager?",
-                        choices: ['a', 'b', 'c']
+                        message: "Who is the new employee's manager? John Doe(1), Tammer Galal(8), Charles LeRoi(12), Edward Bellamy(15)",
+                        choices: ['1', '8', '12', '15']
                     }])
                     .then(response => {
-                        console.log(response);
-                        // addEmployee();
+                        //console.log(response);
+                        addEmployee(response);
                         userOptions();
                     });                
                 break;
